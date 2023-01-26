@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     { F4, F5, F6, F7, D7 }, \
     { D1, D3, B2, B3, B1 }, \
     { B4, E6, C6, B5, D0 }, \
-    { B6, D4, NO_PIN, NO_PIN, NO_PIN } \
+    { D4, B6, NO_PIN, NO_PIN, NO_PIN } \
 }
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
