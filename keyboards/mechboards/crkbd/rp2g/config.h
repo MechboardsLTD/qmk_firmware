@@ -56,3 +56,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SPLIT_TRANSACTION_IDS_KB SCR_SLV_SYNC
 #define SPLIT_WPM_ENABLE
 #define SPLIT_LAYER_STATE_ENABLE
+
+#define USB_VBUS_PIN GP29
