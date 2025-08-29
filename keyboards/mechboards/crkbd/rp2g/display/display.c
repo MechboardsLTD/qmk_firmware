@@ -31,7 +31,11 @@ void display_housekeeping_task(void) {
         currwpm      = get_current_wpm();
 
         if (lastwpm != currwpm) {
-            draw_wpm_text();
+            if (currScreen) {
+                draw_wpm_text_tight();
+            } else {
+                draw_layers_tight();
+            }
         }
         wpm_chart_write_value(currwpm);
         draw_wpm_chart(false);
@@ -46,7 +50,11 @@ void display_housekeeping_task(void) {
                 case 1:
                 case 2:
                 case 3:
-                    draw_layers();
+                    if (currScreen) {
+                        draw_layers_tight();
+                    } else {
+                        draw_layers();
+                    }
                     break;
             }
         }
@@ -75,16 +83,25 @@ void processes_command(uint8_t *data, uint8_t length) {
             draw_clock(string);
             break;
         case _RAM:
-            // lv_bar_set_value(bar_ram, data[4], LV_ANIM_OFF);
+            draw_bar_ram(data[4]);
+            qp_flush(lcd);
+            uprintf("RAM: %d\n", data[4]);
             break;
         case _CPU:
-            // lv_bar_set_value(bar_cpu, data[4], LV_ANIM_OFF);
+            draw_bar_cpu(data[4]);
+            qp_flush(lcd);
+
+            uprintf("CPU: %d\n", data[4]);
             break;
         case _GPU:
-            // lv_bar_set_value(bar_gpu, data[4], LV_ANIM_OFF);
+            draw_bar_gpu(data[4]);
+            qp_flush(lcd);
+
+            uprintf("GPU: %d\n", data[4]);
             break;
         case _PROGRESS:
             // lv_slider_set_value(progress, data[4], LV_ANIM_ON);
+            uprintf("PROGRESS: %d\n", data[4]);
             break;
         case _NOWPLAYING:
             read_string(data, string, length - 4);

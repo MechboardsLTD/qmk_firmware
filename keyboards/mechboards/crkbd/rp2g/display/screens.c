@@ -12,6 +12,10 @@ static hsv_t mb = {129, 189, 181};
 
 int vals = 20;
 
+static uint8_t bar_start_x;
+static uint8_t bar_length;
+static uint8_t bar_height;
+
 void spotify_display_init(void) {
     // label_time = lv_label_create(lv_scr_act());
     // lv_label_set_text(label_time, "00:00");
@@ -43,88 +47,6 @@ void gif_display_init(void) {
     // lv_obj_align(gif, LV_ALIGN_TOP_MID, 0, 30);
 }
 
-void pc_layer_wpm_display_init(void) {
-    // label_cpu = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_cpu, "CPU");
-    // lv_obj_align(label_cpu, LV_ALIGN_TOP_LEFT, 1, 1);
-    // lv_obj_set_style_text_font(label_cpu, &pixellari_14, LV_PART_MAIN);
-
-    // bar_cpu = lv_bar_create(lv_scr_act());
-    // lv_obj_set_size(bar_cpu, 48, 13);
-    // lv_obj_align(bar_cpu, LV_ALIGN_TOP_LEFT, 30, 1);
-    // lv_obj_add_style(bar_cpu, &bar_style_bg, 0);
-    // lv_obj_add_style(bar_cpu, &bar_style_indic, LV_PART_INDICATOR);
-    // lv_bar_set_range(bar_cpu, 0, 100);
-    // lv_bar_set_value(bar_cpu, 75, LV_ANIM_OFF);
-
-    // label_gpu = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_gpu, "GPU");
-    // lv_obj_align(label_gpu, LV_ALIGN_TOP_LEFT, 1, 16);
-    // lv_obj_set_style_text_font(label_gpu, &pixellari_14, LV_PART_MAIN);
-
-    // bar_gpu = lv_bar_create(lv_scr_act());
-    // lv_obj_set_size(bar_gpu, 48, 13);
-    // lv_obj_align(bar_gpu, LV_ALIGN_TOP_LEFT, 30, 16);
-    // lv_obj_add_style(bar_gpu, &bar_style_bg, 0);
-    // lv_obj_add_style(bar_gpu, &bar_style_indic, LV_PART_INDICATOR);
-    // lv_bar_set_range(bar_gpu, 0, 100);
-    // lv_bar_set_value(bar_gpu, 50, LV_ANIM_OFF);
-
-    // label_ram = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_ram, "RAM");
-    // lv_obj_align(label_ram, LV_ALIGN_TOP_LEFT, 1, 31);
-    // lv_obj_set_style_text_font(label_ram, &pixellari_14, LV_PART_MAIN);
-
-    // bar_ram = lv_bar_create(lv_scr_act());
-    // lv_obj_set_size(bar_ram, 48, 13);
-    // lv_obj_align(bar_ram, LV_ALIGN_TOP_LEFT, 30, 31);
-    // lv_obj_add_style(bar_ram, &bar_style_bg, 0);
-    // lv_obj_add_style(bar_ram, &bar_style_indic, LV_PART_INDICATOR);
-    // lv_bar_set_range(bar_ram, 0, 100);
-    // lv_bar_set_value(bar_ram, 95, LV_ANIM_OFF);
-
-    // // Layer Indication
-    // label_layer = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_layer, "LAYER");
-    // lv_obj_align(label_layer, LV_ALIGN_CENTER, 0, -24);
-
-    // layer_btn_matrix = lv_btnmatrix_create(lv_scr_act());
-    // lv_obj_set_size(layer_btn_matrix, 80, 24);
-    // lv_obj_align(layer_btn_matrix, LV_ALIGN_CENTER, 0, -2);
-    // lv_btnmatrix_set_map(layer_btn_matrix, btnm_map);
-    // lv_btnmatrix_set_btn_ctrl(layer_btn_matrix, 0, LV_BTNMATRIX_CTRL_CHECKABLE);
-    // lv_btnmatrix_set_btn_ctrl(layer_btn_matrix, 1, LV_BTNMATRIX_CTRL_CHECKABLE);
-    // lv_btnmatrix_set_btn_ctrl(layer_btn_matrix, 2, LV_BTNMATRIX_CTRL_CHECKABLE);
-    // lv_btnmatrix_set_btn_ctrl(layer_btn_matrix, 3, LV_BTNMATRIX_CTRL_CHECKABLE);
-    // lv_obj_add_style(layer_btn_matrix, &style_btn_matrix, LV_PART_MAIN);
-    // lv_obj_add_style(layer_btn_matrix, &style_btn, LV_PART_ITEMS);
-    // lv_obj_add_style(layer_btn_matrix, &style_btn_checked, LV_PART_ITEMS | LV_STATE_CHECKED);
-    // lv_btnmatrix_set_btn_ctrl(layer_btn_matrix, 0, LV_BTNMATRIX_CTRL_CHECKED);
-    // lv_btnmatrix_set_one_checked(layer_btn_matrix, true);
-
-    // /*WPM chart and Label*/
-    // label_wpm = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_wpm, "WPM:0");
-    // lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
-    // lv_obj_align(label_wpm, LV_ALIGN_CENTER, 0, 20);
-
-    // chart = lv_chart_create(lv_scr_act());
-    // lv_chart_set_type(chart, LV_CHART_TYPE_LINE);
-    // lv_chart_set_point_count(chart, vals);
-    // lv_chart_set_range(chart, LV_CHART_AXIS_PRIMARY_Y, 0, 150);
-    // lv_obj_set_style_pad_column(chart, 0.1, 0);
-    // lv_obj_set_size(chart, 80, 40);
-    // lv_obj_align(chart, LV_ALIGN_CENTER, 0, 50);
-    // lv_chart_set_axis_tick(chart, LV_CHART_AXIS_PRIMARY_X, 0, 0, 0, 0, 0, 0);
-    // lv_chart_set_axis_tick(chart, LV_CHART_AXIS_PRIMARY_Y, 0, 0, 0, 0, 0, 0);
-
-    // ser = lv_chart_add_series(chart, lv_color_hex(0x30b1b6), LV_CHART_AXIS_PRIMARY_Y);
-    // lv_obj_set_style_size(chart, 0, LV_PART_INDICATOR);
-    // lv_obj_set_style_size(chart, 3, LV_PART_ITEMS);
-
-    // lv_obj_add_style(chart, &style_chart, LV_PART_MAIN);
-}
-
 void drawtext_centered_recolor(painter_device_t device, uint16_t x, uint16_t y, uint8_t width, painter_font_handle_t font, const char *str, uint8_t hue_fg, uint8_t sat_fg, uint8_t val_fg, uint8_t hue_bg, uint8_t sat_bg, uint8_t val_bg) {
     qp_drawtext_recolor(lcd, (x + (width / 2)) - qp_textwidth(font, str) / 2, y, font, str, hue_fg, sat_fg, val_fg, hue_bg, sat_bg, val_bg);
 }
@@ -139,6 +61,10 @@ void drawtext_layer(uint16_t x, uint16_t y, uint8_t width, const char *str, uint
     } else {
         drawtext_centered_recolor(lcd, x, y, width, pixellari_18, str, 255, 0, 255, 0, 0, 0);
     }
+}
+
+void clear_display(void) {
+    qp_rect(lcd, 0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1, 0, 0, 0, true);
 }
 
 void draw_layers(void) {
@@ -204,13 +130,71 @@ void draw_clock(const char *str) {
 }
 
 void clock_display_init(void) {
-    qp_rect(lcd, 0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1, 0, 0, 0, true);
+    clear_display();
     draw_clock("00\n00\npm");
 }
 
 void wpm_layer_display_init(void) {
+    clear_display();
     draw_layers();
     draw_wpm_text();
     draw_wpm_chart(true);
+    qp_flush(lcd);
+}
+
+void draw_pc_stats_text(void) {
+    qp_drawtext(lcd, 0, 0, pixellari_14, "CPU");
+    qp_drawtext(lcd, 0, pixellari_14->line_height + 1, pixellari_14, "GPU");
+    qp_drawtext(lcd, 0, (pixellari_14->line_height + 1) * 2, pixellari_14, "RAM");
+}
+
+void draw_bar(uint8_t percent, uint8_t left, uint8_t top, uint8_t max_length, uint8_t height) {
+    uint8_t bar_length = (((max_length << 7) / 100) * percent) >> 7;
+    qp_rect(lcd, left, top, left + max_length, top + height, 0, 0, 0, true);
+    qp_rect(lcd, left, top, left + max_length, top + height, mb.h, mb.s, mb.v, false);
+    qp_rect(lcd, left, top, left + bar_length, top + height, mb.h, mb.s, mb.v, true);
+}
+
+void draw_bar_cpu(uint8_t percent) {
+    draw_bar(percent, bar_start_x, 0, bar_length, bar_height);
+}
+void draw_bar_gpu(uint8_t percent) {
+    draw_bar(percent, bar_start_x, pixellari_14->line_height + 1, bar_length, bar_height);
+}
+void draw_bar_ram(uint8_t percent) {
+    draw_bar(percent, bar_start_x, (pixellari_14->line_height + 1) * 2, bar_length, bar_height);
+}
+
+void draw_pc_stats_graphs(uint8_t cpu, uint8_t gpu, uint8_t ram) {
+    draw_bar_cpu(cpu);
+    draw_bar_gpu(gpu);
+    draw_bar_ram(ram);
+}
+
+void draw_layers_tight(void) {
+    drawtext_centered(lcd, 0, 48, 80, pixellari_18, "LAYER");
+    drawtext_layer(0, 67, 20, "1", 0);
+    drawtext_layer(20, 67, 20, "2", 1);
+    drawtext_layer(40, 67, 20, "3", 2);
+    drawtext_layer(60, 67, 20, "4", 3);
+}
+
+void draw_wpm_text_tight(void) {
+    char buffer[64] = {0};
+    snprintf(buffer, sizeof(buffer), "WPM:%d", get_current_wpm());
+    qp_rect(lcd, 0, 87, LCD_WIDTH - 1, 87 + pixellari_18->line_height, 0, 0, 0, true);
+    drawtext_centered(lcd, 0, 87, 80, pixellari_18, buffer);
+}
+
+void pc_layer_wpm_display_init(void) {
+    clear_display();
+    bar_start_x = qp_textwidth(pixellari_14, "RAM") + 1;
+    bar_length  = LCD_WIDTH - 1 - bar_start_x;
+    bar_height  = pixellari_14->line_height - 2;
+
+    draw_pc_stats_text();
+    draw_pc_stats_graphs(0, 0, 0);
+    draw_layers_tight();
+    draw_wpm_text_tight();
     qp_flush(lcd);
 }
