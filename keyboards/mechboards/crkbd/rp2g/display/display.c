@@ -6,8 +6,14 @@
 #include "printf.h"
 #include "transactions.h"
 #include "screens.h"
+#include "display/gfx/pixellari14.qff.h"
+#include "display/gfx/pixellari18.qff.h"
+#include "display/gfx/pixellari24.qff.h"
 
 painter_device_t lcd;
+painter_font_handle_t pixellari_14;
+painter_font_handle_t pixellari_18;
+painter_font_handle_t pixellari_24;
 
 bool    master;
 int     currwpm      = 0;
@@ -181,6 +187,11 @@ void display_init(void) {
     // Initialise the LCD
     lcd = qp_st7735_make_spi_device(LCD_WIDTH, LCD_HEIGHT, LCD_CS_PIN, LCD_DC_PIN, LCD_RST_PIN, LCD_SPI_DIVISOR, LCD_SPI_MODE);
     qp_init(lcd, LCD_ROTATION);
+
+    // Load fonts
+    pixellari_14 = qp_load_font_mem(font_pixellari14);
+    pixellari_18 = qp_load_font_mem(font_pixellari18);
+    pixellari_24 = qp_load_font_mem(font_pixellari24);
 
     // Apply Offset
     qp_set_viewport_offsets(lcd, LCD_OFFSET_X, LCD_OFFSET_Y);
