@@ -20,35 +20,23 @@ int     currwpm      = 0;
 int     lastwpm      = 0;
 int     timer        = 0;
 int     count        = 0;
-bool    updating_wpm = true;
 int     currlay      = 0;
 int     lastlay      = 0;
 uint8_t currScreen   = 0xFF;
 
 void display_housekeeping_task(void) {
-    // Update WPM every 5 seconds
-    if (timer_elapsed(timer) > 1000 && !updating_wpm && (currScreen == 0x00 || currScreen == 0x01)) {
-        updating_wpm = true;
+    if (timer_elapsed(timer) > 1000 && (currScreen == 0x00 || currScreen == 0x01)) {
         timer        = timer_read();
         lastwpm      = currwpm;
         currwpm      = get_current_wpm();
-        // If current WPM is the same as the last WPM, we will update the chart with the same value.
-        // Once we have the chart filled completly with the same one we stop updating it.
-        if (currwpm == lastwpm) {
-            count++;
-            if (count < vals) {
-                // lv_chart_set_next_value(chart, ser, currwpm);
-            }
-        } else {
-            count = 0;
-            // lv_label_set_text_fmt(label_wpm, "WPM:%d", currwpm);
-            // lv_chart_set_next_value(chart, ser, currwpm);
+
+        if (lastwpm != currwpm) {
+            draw_wpm_text();
         }
-        updating_wpm = false;
+        wpm_chart_write_value(currwpm);
+        draw_wpm_chart(false);
     }
 
-    // Update the layer button matrix to show selected layer
-    // As we have lv_btnmatrix_set_one_checked true, it will uncheck the last one and check the new one
     if (currScreen == 0x00 || currScreen == 0x01) {
         currlay = get_highest_layer(layer_state);
         if (currlay != lastlay) {
@@ -58,7 +46,7 @@ void display_housekeeping_task(void) {
                 case 1:
                 case 2:
                 case 3:
-                    // lv_btnmatrix_set_btn_ctrl(layer_btn_matrix, currlay, LV_BTNMATRIX_CTRL_CHECKED);
+                    draw_layers();
                     break;
             }
         }
@@ -202,21 +190,18 @@ void display_init(void) {
     qp_comms_command(lcd, ST77XX_CMD_INVERT_ON);
     qp_comms_stop(lcd);
 #endif
+    qp_rect(lcd, 0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1, 0, 0, 0, true);
 
     draw_screen(0);
 }
 
 void draw_screen(uint8_t screen) {
-    updating_wpm = true;
-
     switch (screen) {
         case 0x00:
             wpm_layer_display_init();
-            updating_wpm = false;
             break;
         case 0x01:
             pc_layer_wpm_display_init();
-            updating_wpm = false;
             break;
         case 0x02:
             clock_display_init();
