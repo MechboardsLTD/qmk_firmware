@@ -72,7 +72,7 @@ void processes_command(uint8_t *data, uint8_t length) {
         case _TIME:
             read_string(data, string, length - 2);
             uprintf("Time: %s\n", string);
-            // lv_label_set_text(label_time, string);
+            draw_clock(string);
             break;
         case _RAM:
             // lv_bar_set_value(bar_ram, data[4], LV_ANIM_OFF);

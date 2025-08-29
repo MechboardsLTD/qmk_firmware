@@ -11,5 +11,6 @@ void draw_wpm_chart(bool init);
 void draw_wpm_text(void);
 
 void draw_layers(void);
+void draw_clock(const char *str);
 
 int vals;

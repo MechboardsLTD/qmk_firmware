@@ -125,13 +125,6 @@ void pc_layer_wpm_display_init(void) {
     // lv_obj_add_style(chart, &style_chart, LV_PART_MAIN);
 }
 
-void clock_display_init(void) {
-    // label_time = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_time, "00\n00");
-    // lv_obj_align(label_time, LV_ALIGN_CENTER, 0, 0);
-    // lv_obj_set_style_text_font(label_time, &pixellari_24, LV_PART_MAIN);
-}
-
 void drawtext_centered_recolor(painter_device_t device, uint16_t x, uint16_t y, uint8_t width, painter_font_handle_t font, const char *str, uint8_t hue_fg, uint8_t sat_fg, uint8_t val_fg, uint8_t hue_bg, uint8_t sat_bg, uint8_t val_bg) {
     qp_drawtext_recolor(lcd, (x + (width / 2)) - qp_textwidth(font, str) / 2, y, font, str, hue_fg, sat_fg, val_fg, hue_bg, sat_bg, val_bg);
 }
@@ -194,6 +187,25 @@ void draw_wpm_chart(bool init) {
         uint8_t scaled_value = scale8(WPM_CHART_HEIGHT, wpm_chart.values[location]);
         qp_line(lcd, i, LCD_HEIGHT - 1 - 10, i, (LCD_HEIGHT - 1 - 10) - scaled_value, mb.h, mb.s, mb.v);
     }
+}
+
+void draw_clock(const char *str) {
+    char hour[] = "SO";
+    char min[]  = "ME";
+    char ind[]  = "TM";
+
+    memcpy(hour, str, 2);
+    memcpy(min, &str[3], 2);
+    memcpy(ind, &str[6], 2);
+
+    drawtext_centered(lcd, 0, 35, 80, pixellari_24, hour);
+    drawtext_centered(lcd, 0, 65, 80, pixellari_24, min);
+    drawtext_centered(lcd, 0, 95, 80, pixellari_24, ind);
+}
+
+void clock_display_init(void) {
+    qp_rect(lcd, 0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1, 0, 0, 0, true);
+    draw_clock("00\n00\npm");
 }
 
 void wpm_layer_display_init(void) {
