@@ -15,6 +15,8 @@ painter_font_handle_t pixellari_14;
 painter_font_handle_t pixellari_18;
 painter_font_handle_t pixellari_24;
 
+uint8_t rgb565_image[160 * 80 * 2];
+
 bool    master;
 int     currwpm      = 0;
 int     lastwpm      = 0;
@@ -118,7 +120,7 @@ void processes_command(uint8_t *data, uint8_t length) {
             uprintf("Image FS\n");
             uint16_t y = ((uint16_t)data[4] << 8) | data[5];
             uprintf("Image %d %d %hu %d\n", data[4], data[5], y, data[6]);
-            // memcpy(&lv_scr[(y * 25)], &data[7], data[6]);
+            memcpy(&rgb565_image[(y * 25)], &data[7], data[6]);
             break;
         }
         case _IMG_GIF: {
@@ -137,7 +139,9 @@ void processes_command(uint8_t *data, uint8_t length) {
                     break;
                 case _IMG_FS:
                     uprintf("Image FS Set\n");
-                    // lv_img_set_src(img_scr, &scr);
+                    draw_screen(0xFF);
+                    qp_viewport(lcd, 0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1);
+                    qp_pixdata(lcd, rgb565_image, 160 * 80);
                     break;
                 case _IMG_GIF:
                     if (data[5] == 0x00) {
@@ -234,6 +238,4 @@ void draw_screen(uint8_t screen) {
             break;
     }
     currScreen = screen;
-    // Whole Screen Custom Image Container
-    // img_scr = lv_img_create(lv_scr_act());
 }
