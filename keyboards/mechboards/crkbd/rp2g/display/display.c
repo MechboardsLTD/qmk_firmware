@@ -16,6 +16,7 @@ painter_font_handle_t pixellari_18;
 painter_font_handle_t pixellari_24;
 
 uint8_t rgb565_image[160 * 80 * 2];
+uint8_t album_art_image[64 * 64 * 2];
 
 bool    master;
 int     currwpm      = 0;
@@ -82,7 +83,11 @@ void processes_command(uint8_t *data, uint8_t length) {
         case _TIME:
             read_string(data, string, length - 2);
             uprintf("Time: %s\n", string);
-            draw_clock(string);
+            if (currScreen == 0x03) {
+                draw_clock_title(string);
+            } else {
+                draw_clock(string);
+            }
             break;
         case _RAM:
             draw_bar_ram(data[4]);
@@ -113,7 +118,7 @@ void processes_command(uint8_t *data, uint8_t length) {
         case _IMAGE: {
             uint16_t x = ((uint16_t)data[4] << 8) | data[5];
             uprintf("Image %d %d %hu %d\n", data[4], data[5], x, data[6]);
-            // memcpy(&lv_mb_map[x * 25], &data[7], data[6]);
+            memcpy(&album_art_image[x * 25], &data[7], data[6]);
             break;
         }
         case _IMG_FS: {
@@ -135,7 +140,8 @@ void processes_command(uint8_t *data, uint8_t length) {
             switch (data[4]) {
                 case _IMAGE:
                     uprintf("Image Set\n");
-                    // lv_img_set_src(album_art, &mb);
+                    qp_viewport(lcd, 8, 35, LCD_WIDTH - 1 - 8, 35 + 64);
+                    qp_pixdata(lcd, album_art_image, 64 * 64);
                     break;
                 case _IMG_FS:
                     uprintf("Image FS Set\n");

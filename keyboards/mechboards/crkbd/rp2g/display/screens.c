@@ -16,37 +16,6 @@ static uint8_t bar_start_x;
 static uint8_t bar_length;
 static uint8_t bar_height;
 
-void spotify_display_init(void) {
-    // label_time = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_time, "00:00");
-    // lv_obj_align(label_time, LV_ALIGN_TOP_MID, 0, 4);
-
-    // album_art = lv_img_create(lv_scr_act());
-    // lv_img_set_src(album_art, &mb);
-    // lv_obj_align(album_art, LV_ALIGN_TOP_MID, 0, 30);
-
-    // label_track = lv_label_create(lv_scr_act());
-    // lv_label_set_text(label_track, "Now Playing");
-    // lv_obj_align(label_track, LV_ALIGN_CENTER, 0, 35);
-    // lv_obj_set_width(label_track, 74);
-    // lv_obj_set_style_text_color(label_track, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
-    // // lv_obj_set_style_text_font(label_track, LV_FONT_MONTSERRAT_28, LV_PART_MAIN);
-    // lv_label_set_long_mode(label_track, LV_LABEL_LONG_SCROLL_CIRCULAR);
-
-    // progress = lv_slider_create(lv_scr_act());
-    // lv_obj_set_size(progress, 70, 4);
-    // lv_obj_align(progress, LV_ALIGN_CENTER, 0, 60);
-    // lv_slider_set_range(progress, 0, 100);
-    // lv_obj_add_style(progress, &style_main, LV_PART_MAIN);
-    // lv_obj_add_style(progress, &style_indicator, LV_PART_INDICATOR);
-    // lv_obj_add_style(progress, &style_knob, LV_PART_KNOB);
-}
-void gif_display_init(void) {
-    // gif = lv_gif_create(lv_scr_act());
-    // lv_gif_set_src(gif, &ezgif);
-    // lv_obj_align(gif, LV_ALIGN_TOP_MID, 0, 30);
-}
-
 void drawtext_centered_recolor(painter_device_t device, uint16_t x, uint16_t y, uint8_t width, painter_font_handle_t font, const char *str, uint8_t hue_fg, uint8_t sat_fg, uint8_t val_fg, uint8_t hue_bg, uint8_t sat_bg, uint8_t val_bg) {
     qp_drawtext_recolor(lcd, (x + (width / 2)) - qp_textwidth(font, str) / 2, y, font, str, hue_fg, sat_fg, val_fg, hue_bg, sat_bg, val_bg);
 }
@@ -197,4 +166,29 @@ void pc_layer_wpm_display_init(void) {
     draw_layers_tight();
     draw_wpm_text_tight();
     qp_flush(lcd);
+}
+
+void draw_clock_title(const char *str) {
+    drawtext_centered(lcd, 0, 0, LCD_WIDTH - 1, pixellari_18, str);
+}
+
+void draw_bar_progress(uint8_t percent) {
+    draw_bar(percent, 0, 150, LCD_WIDTH - 1, 5);
+}
+
+void spotify_display_init(void) {
+    clear_display();
+    draw_clock_title("00:00am");
+    draw_bar_progress(0);
+
+    qp_rect(lcd, 8, 35, LCD_WIDTH - 1 - 8, 35 + 64, mb.h, mb.s, mb.v, false);
+
+    drawtext_centered(lcd, 0, 120, LCD_WIDTH - 1, pixellari_18, "Now playing");
+}
+
+void gif_display_init(void) {
+    clear_display();
+    // gif = lv_gif_create(lv_scr_act());
+    // lv_gif_set_src(gif, &ezgif);
+    // lv_obj_align(gif, LV_ALIGN_TOP_MID, 0, 30);
 }

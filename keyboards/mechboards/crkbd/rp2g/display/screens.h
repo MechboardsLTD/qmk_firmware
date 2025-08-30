@@ -14,6 +14,8 @@ void draw_wpm_text_tight(void);
 void draw_layers(void);
 void draw_layers_tight(void);
 void draw_clock(const char *str);
+void draw_clock_title(const char *str);
+
 void draw_bar_cpu(uint8_t percent);
 void draw_bar_gpu(uint8_t percent);
 void draw_bar_ram(uint8_t percent);
