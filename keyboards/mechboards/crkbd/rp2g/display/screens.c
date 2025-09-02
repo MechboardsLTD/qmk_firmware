@@ -188,6 +188,8 @@ void spotify_display_init(void) {
 
 void gif_display_init(void) {
     clear_display();
+    drawtext_centered(lcd, 0, 60, LCD_WIDTH - 1, pixellari_18, "Not");
+    drawtext_centered(lcd, 0, 80, LCD_WIDTH - 1, pixellari_18, "supported");
     // gif = lv_gif_create(lv_scr_act());
     // lv_gif_set_src(gif, &ezgif);
     // lv_obj_align(gif, LV_ALIGN_TOP_MID, 0, 30);
