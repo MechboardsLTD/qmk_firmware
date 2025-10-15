@@ -1,0 +1,110 @@
+{
+    "manufacturer": "Gleb Sabirzyanov",
+    "keyboard_name": "skull",
+    "maintainer": "glebsexy",
+    "bootloader": "stm32-dfu",
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true,
+        "rgblight": true
+    },
+    "matrix_pins": {
+        "direct": [
+            ["B0", "B1", "B2", "B10", "B11"],
+            ["A0", "A1", "B14", "B12", "A7"],
+            ["A6", "A5", "A4", "A3", "A2"],
+            [null, null, null, "B6", "B5"]
+        ]
+    },
+    "split": {
+        "enabled": true,
+        "handedness": {"pin":"B9"},
+        "matrix_pins": {
+            "right": {
+                "direct": [
+                    ["B7", "B6", "B5","B4", "B3"],
+                    ["A3", "A4", "A5", "A6", "B8"],
+                    ["B2", "B1", "B0", "A7", "A2"],
+                    ["B11", "B10", null, null, null]
+                ]
+            }
+        },
+        "serial": {"driver": "usart"}
+    },
+    "processor": "STM32F072",
+    "url": "",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x61EB",
+        "vid": "0x0001"
+    },
+    "layouts": {
+        "LAYOUT_split_3x5_2": {
+            "layout": [
+                { "matrix": [0, 0], "x": 0, "y": 0.25 },
+                { "matrix": [0, 1], "x": 1, "y": 0.125 },
+                { "matrix": [0, 2], "x": 2, "y": 0 },
+                { "matrix": [0, 3], "x": 3, "y": 0.125 },
+                { "matrix": [0, 4], "x": 4, "y": 0.25 },
+                { "matrix": [4, 0], "x": 7, "y": 0.25 },
+                { "matrix": [4, 1], "x": 8, "y": 0.125 },
+                { "matrix": [4, 2], "x": 9, "y": 0 },
+                { "matrix": [4, 3], "x": 10, "y": 0.125 },
+                { "matrix": [4, 4], "x": 11, "y": 0.25 },
+                { "matrix": [1, 0], "x": 0, "y": 1.25 },
+                { "matrix": [1, 1], "x": 1, "y": 1.125 },
+                { "matrix": [1, 2], "x": 2, "y": 1 },
+                { "matrix": [1, 3], "x": 3, "y": 1.125 },
+                { "matrix": [1, 4], "x": 4, "y": 1.25 },
+                { "matrix": [5, 0], "x": 7, "y": 1.25 },
+                { "matrix": [5, 1], "x": 8, "y": 1.125 },
+                { "matrix": [5, 2], "x": 9, "y": 1 },
+                { "matrix": [5, 3], "x": 10, "y": 1.125 },
+                { "matrix": [5, 4], "x": 11, "y": 1.25 },
+                { "matrix": [2, 0], "x": 0, "y": 2.25 },
+                { "matrix": [2, 1], "x": 1, "y": 2.125 },
+                { "matrix": [2, 2], "x": 2, "y": 2 },
+                { "matrix": [2, 3], "x": 3, "y": 2.125 },
+                { "matrix": [2, 4], "x": 4, "y": 2.25 },
+                { "matrix": [6, 0], "x": 7, "y": 2.25 },
+                { "matrix": [6, 1], "x": 8, "y": 2.125 },
+                { "matrix": [6, 2], "x": 9, "y": 2 },
+                { "matrix": [6, 3], "x": 10, "y": 2.125 },
+                { "matrix": [6, 4], "x": 11, "y": 2.25 },
+                { "matrix": [3, 3], "x": 3.5, "y": 3.25 },
+                { "matrix": [3, 4], "x": 4.5, "y": 3.5 },
+                { "matrix": [7, 0], "x": 6.5, "y": 3.5 },
+                { "matrix": [7, 1], "x": 7.5, "y": 3.25 }
+            ]
+        }
+    },
+    "ws2812": {
+        "pin": "B13",
+        "driver": "pwm"
+    },
+    "rgblight": {
+        "default": {"animation": "rainbow_swirl"},
+        "led_count": 26,
+        "split": true,
+        "split_count": [13, 13],
+        "hue_steps": 10,
+        "saturation_steps": 17,
+        "brightness_steps": 17,
+        "animations": {
+            "breathing": true,
+            "rainbow_mood": true,
+            "rainbow_swirl": true,
+            "snake": true,
+            "knight": true,
+            "christmas": true,
+            "static_gradient": true,
+            "rgb_test": true,
+            "alternating": true,
+            "twinkle": true
+        }
+    }
+}
