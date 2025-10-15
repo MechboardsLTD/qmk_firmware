@@ -1,0 +1,35 @@
+// Copyright 2025 Dasky (@daskygit)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+#include "keyboards/mechboards/common/rgb_effects.h"
+
+/* VBUS detection. */
+#define USB_VBUS_PIN GP0
+
+/* CRC. */
+#define CRC8_USE_TABLE
+#define CRC8_OPTIMIZE_SPEED
+
+#define	SPLIT_HAND_PIN_LOW_IS_LEFT
+
+#define SERIAL_USART_FULL_DUPLEX
+#define SERIAL_USART_PIN_SWAP
+#define SERIAL_USART_RX_PIN GP27
+#define SERIAL_USART_SPEED 921600
+
+#define ENCODER_SW_PIN GP10 
+
+#define VIK_GPIO1 GP28
+#define VIK_GPIO2 GP29
+#define VIK_CS GP11
+
+#define I2C_DRIVER I2CD0
+#define I2C1_SDA_PIN GP8
+#define I2C1_SCL_PIN GP9
+
+#define SPI_DRIVER SPID1
+#define SPI_SCK_PIN GP14
+#define SPI_MOSI_PIN GP15
+#define SPI_MISO_PIN GP12
