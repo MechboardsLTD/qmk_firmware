@@ -1,0 +1,3 @@
+#pragma once
+
+#define SPLIT_TRANSACTION_IDS_USER USER_SYNC_A
