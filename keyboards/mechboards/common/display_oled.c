@@ -3,6 +3,7 @@
 
 #include "quantum.h"
 
+static bool     oled_user       = false;
 static uint16_t current_keycode = 0xFF;
 
 static const char *depad_str(const char *depad_str, char depad_char) {
@@ -242,25 +243,26 @@ bool process_detected_host_os_kb(os_variant_t detected_os) {
         return false;
     }
 
-    oled_set_cursor(0, 10);
-    switch (detected_os) {
-        case OS_MACOS:
-            oled_write_ln("MacOS", false);
-        case OS_IOS:
-            oled_write_ln("Apple", false);
-            break;
-        case OS_WINDOWS:
-            oled_write_ln("Win", false);
-            break;
-        case OS_LINUX:
-            oled_write_ln("Linux", false);
-            break;
-        case OS_UNSURE:
-            oled_write_ln("Unkno", false);
+    if (!oled_user) {
+        oled_set_cursor(0, 10);
+        switch (detected_os) {
+            case OS_MACOS:
+                oled_write_ln("MacOS", false);
+            case OS_IOS:
+                oled_write_ln("Apple", false);
+                break;
+            case OS_WINDOWS:
+                oled_write_ln("Win", false);
+                break;
+            case OS_LINUX:
+                oled_write_ln("Linux", false);
+                break;
+            case OS_UNSURE:
+                oled_write_ln("Unkno", false);
 
-            break;
+                break;
+        }
     }
-
     return true;
 }
 
@@ -293,9 +295,11 @@ void keyboard_post_init_kb(void) {
 }
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
-    state = layer_state_set_user(state);
-    oled_set_cursor(0, 2);
-    oled_write_ln(layer_string(get_highest_layer(state)), false);
+        state = layer_state_set_user(state);
+            if (!oled_user) {
+        oled_set_cursor(0, 2);
+        oled_write_ln(layer_string(get_highest_layer(state)), false);
+    }
     return state;
 }
 
@@ -306,7 +310,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t loop_rate = 0;
 void     housekeeping_task_kb(void) {
-    if (is_keyboard_master()) {
+    if (!oled_user && is_keyboard_master()) {
         static uint32_t     loop_count = 0;
         static fast_timer_t loop_time  = 0;
         loop_count++;
@@ -320,7 +324,7 @@ void     housekeeping_task_kb(void) {
             }
         }
     }
-    if (is_oled_on() && last_input_activity_elapsed() > OLED_TIMEOUT) {
+    if (!oled_user && is_oled_on() && last_input_activity_elapsed() > OLED_TIMEOUT) {
         oled_off();
     }
 }
@@ -345,6 +349,7 @@ void oled_reinit_slave(void) {
 
 bool oled_task_kb(void) {
     if (!oled_task_user()) {
+        oled_user = true;
         return false;
     }
 
