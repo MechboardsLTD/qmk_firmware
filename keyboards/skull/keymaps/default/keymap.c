@@ -69,6 +69,8 @@ void set_eyehsv(bool enable, uint8_t hue, uint8_t sat, uint8_t val){
             rgblight_driver.set_color(i, 0, 0, 0);
         }
     }
+
+    rgblight_driver.flush();
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -107,7 +109,6 @@ void user_sync_eyehsv_handler(uint8_t in_buflen, const void* in_data, uint8_t ou
     if (user_eyeconfig.raw != m2s->raw){
         user_eyeconfig.raw = m2s->raw;
         set_eyehsv(user_eyeconfig.enable,user_eyeconfig.hue,user_eyeconfig.sat,user_eyeconfig.val);
-        rgblight_driver.flush();
     }
 }
 
