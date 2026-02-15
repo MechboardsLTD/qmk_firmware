@@ -7,9 +7,9 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [0] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
-  KC_LCTL,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+  QK_BOOT,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    QK_BACKLIGHT_UP,
+  KC_TAB,   QK_BACKLIGHT_TOGGLE,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    QK_BACKLIGHT_DOWN,
+  KC_LCTL,  QK_BACKLIGHT_STEP,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
                            KC_LALT, KC_LGUI, MO(1), KC_SPC, KC_ENT, MO(2), KC_BSPC, KC_RGUI
 ),
@@ -49,3 +49,32 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
 #endif
 // clang-format on
+static painter_device_t display;
+
+void keyboard_post_init_user(void){
+  display = qp_st7789_make_spi_device(135, 240, VIK_CS, VIK_GPIO1, VIK_GPIO2, 16, 3);
+  qp_init(display, QP_ROTATION_0);
+  qp_set_viewport_offsets(display, 52, 40);
+
+  qp_rect(display, 0, 0, 134, 239, 255, 0, 255, true);
+  qp_rect(display, 64, 0, 134, 239, 255, 0, 0, true);
+  backlight_set(1);
+
+
+}
+
+void housekeeping_task_user(void) {
+    static uint32_t last_draw = 0;
+    if (timer_elapsed32(last_draw) > 33) { // Throttle to 30fps
+        last_draw = timer_read32();
+        // Draw 8px-wide rainbow filled rectangles down the left side of the display
+        for (int i = 0; i < 239; i+=8) {
+            qp_rect(display, 0, i, 7, i+7, i, 255, 255, true);
+            qp_rect(display, 127, i, 134, i+7, i, 255, 255, true);
+
+        }
+        qp_flush(display);
+    }
+
+    
+}

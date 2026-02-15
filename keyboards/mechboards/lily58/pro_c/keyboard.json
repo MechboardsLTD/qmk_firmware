@@ -18,10 +18,11 @@
         "encoder": true,
         "extrakey": true,
         "mousekey": true,
-        "oled": true,
+        "oled": false,
         "os_detection": true,
         "rgb_matrix": true,
-        "wpm": true
+        "wpm": true,
+        "quantum_painter": true
     },
     "matrix_pins": {
         "cols": ["GP3", "GP4", "GP18", "GP20", "GP22", "GP24"],
