@@ -1,4 +1,4 @@
-// Copyright 2025 Dasky (@daskygit)
+// Copyright 202 Dasky (@daskygit)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
@@ -20,12 +20,13 @@
 
 #define SERIAL_USART_FULL_DUPLEX
 #define SERIAL_USART_PIN_SWAP
-#define SERIAL_USART_RX_PIN GP27
+#define SERIAL_USART_RX_PIN GP19
 #define SERIAL_USART_SPEED 460800
 
-#define ENCODER_SW_PIN GP10
-#define ENCODER_SW_COL 0
+#define ENCODER_SW_PIN GP27
+#define ENCODER_SW_COL 4
 #define ENCODER_SW_ROW 3
+#define ENCODER_SW_PIN_RIGHT GP2
 #define ENCODER_SW_COL_RIGHT 0
 #define ENCODER_SW_ROW_RIGHT 7
 

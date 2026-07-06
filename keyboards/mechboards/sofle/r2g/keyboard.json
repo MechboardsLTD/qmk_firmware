@@ -35,8 +35,7 @@
     },
     "matrix_pins": {
         "cols": ["GP25", "GP24", "GP4", "GP21", "GP23", "GP20", "GP1"],
-        //"rows": ["GP3", "GP22", "GP19", "GP2", "NO_PIN"]
-        "rows": ["GP3", "GP22", "GP19", "GP2", "GP8"]
+        "rows": ["GP3", "GP22", "GP19", "GP2", "GP13"]
 
     },
     "processor": "RP2040",
@@ -167,9 +166,8 @@
         },
         "matrix_pins": {
             "right": {
-                "cols": ["GP13", "GP7", "GP5", "GP4", "GP3", "GP2", "GP1"],
-                //"rows": ["GP1", "GP24", "GP23", "GP22", "NO_PIN"]
-                "rows": ["GP1", "GP24", "GP23", "GP22", "GP8"]
+                "cols": ["GP13", "GP7", "GP5", "GP4", "GP3", "GP2", "GP25"],
+                "rows": ["GP1", "GP24", "GP23", "GP22", "GP19"]
 
             }
         },

@@ -18,7 +18,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE,        KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
                       KC_LGUI, KC_LALT, KC_LCTL, MO(1),   KC_ENT,         KC_SPC,  MO(2),   KC_RCTL, KC_RALT, KC_RGUI,
                     //Left Encoder Press                                           Right Encoder Press
-                             KC_A,                                                         KC_B
+                            KC_MUTE,                                                         KC_MPLY
   ),
   [1] = LAYOUT(
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                            KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_EQL,  KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR, _______,        _______, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
                       _______, _______, _______, _______, _______,        _______, MO(3),   _______, _______, _______,
                     //Left Encoder Press                                           Right Encoder Press
-                             KC_A,                                                         KC_B
+                            KC_MUTE,                                                         KC_MPLY
   ),
   [2] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                          _______, _______, _______, _______, _______ ,_______,
@@ -36,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______,        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                       _______, _______, _______, MO(3),   _______,        _______, _______, _______, _______, _______,
                     //Left Encoder Press                                           Right Encoder Press
-                             KC_A,                                                         KC_B
+                            KC_MUTE,                                                         KC_MPLY
   ),
     [3] = LAYOUT(
     XXXXXXX, XXXXXXX, XXXXXXX ,XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RM_NEXT, RM_HUED, RM_SATD, RM_VALD, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                       _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______,
                     //Left Encoder Press                                           Right Encoder Press
-                             KC_A,                                                         KC_B
+                            KC_MUTE,                                                         KC_MPLY
   )
 };
 

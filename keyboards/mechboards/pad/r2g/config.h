@@ -1,33 +1,15 @@
-// Copyright 2025 Dasky (@daskygit)
+// Copyright 2026 Dasky (@daskygit)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
 
 #include "keyboards/mechboards/common/rgb_effects.h"
 
-/* VBUS detection. */
-#define USB_VBUS_PIN GP0
-
-/* CRC. */
-#define CRC8_USE_TABLE
-#define CRC8_OPTIMIZE_SPEED
 
 #define RGB_MATRIX_MODE_NAME_ENABLE
+#define RGB_MATRIX_CENTER { 32, 32 }
 
 #define QUANTUM_PAINTER_SUPPORTS_256_PALETTE true
-
-#define	SPLIT_HAND_PIN_LOW_IS_LEFT
-
-#define SERIAL_USART_FULL_DUPLEX
-#define SERIAL_USART_PIN_SWAP
-#define SERIAL_USART_RX_PIN GP27
-#define SERIAL_USART_SPEED 460800
-
-#define ENCODER_SW_PIN GP10
-#define ENCODER_SW_COL 0
-#define ENCODER_SW_ROW 3
-#define ENCODER_SW_COL_RIGHT 0
-#define ENCODER_SW_ROW_RIGHT 7
 
 #define VIK_GPIO1 GP28
 #define VIK_GPIO2 GP29
@@ -45,8 +27,6 @@
 #define BACKLIGHT_PWM_DRIVER PWMD4
 #define BACKLIGHT_PWM_CHANNEL RP2040_PWM_CHANNEL_B
 
-#define SPLIT_LAYER_STATE_ENABLE
-#define SPLIT_ACTIVITY_ENABLE
-#define SPLIT_DETECTED_OS_ENABLE
-
 #define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 64
+
+#define LCD_OFFSET_X 53

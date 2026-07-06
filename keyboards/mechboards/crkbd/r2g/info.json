@@ -1,0 +1,88 @@
+{
+    "manufacturer": "Mechboards",
+    "keyboard_name": "Corne Pro R2G",
+    "maintainer": "dasky",
+    "backlight": {
+        "driver": "pwm",
+        "levels": 10,
+        "on_state": 0,
+        "pin": "GP9"
+    },
+    "bootloader": "rp2040",
+    "bootmagic": {
+        "matrix": [0, 1]
+    },
+    "build": {
+        "lto": true
+    },
+    "diode_direction": "COL2ROW",
+    "encoder": {
+        "rotary": [
+            {"pin_a": "GP16", "pin_b": "GP17", "resolution": 2}
+        ]
+    },
+    "features": {
+        "backlight": true,
+        "bootmagic": true,
+        "encoder": true,
+        "extrakey": true,
+        "mousekey": true,
+        "oled": false,
+        "os_detection": true,
+        "quantum_painter": true,
+        "rgb_matrix": true,
+        "wpm": true
+    },
+    "matrix_pins": {
+        "cols": ["GP4", "GP19", "GP25", "GP23", "GP21", "GP3"],
+        "rows": ["GP24", "GP22", "GP20", "GP2"]
+    },
+    "processor": "RP2040",
+    "rgb_matrix": {
+        "animations": {
+            "cycle_left_right": true
+        },
+        "driver": "ws2812",
+        "max_brightness": 128,
+        "sleep": true
+    },
+    "rgblight": {
+        "max_brightness": 128
+    },
+    "split": {
+        "bootmagic": {
+            "matrix": [4, 1]
+        },
+        "enabled": true,
+        "handedness": {
+            "pin": "GP6"
+        },
+        "matrix_pins": {
+            "right": {
+                "cols": ["GP7", "GP3", "GP23", "GP24", "GP5", "GP1"],
+                "rows": ["GP2", "GP22", "GP4", "GP13"]
+            }
+        },
+        "serial": {
+            "driver": "vendor",
+            "pin": "GP26"
+        },
+        "transport": {
+            "sync": {
+                "matrix_state": true,
+                "oled": true,
+                "wpm": true
+            }
+        }
+    },
+    "url": "mechboards.co.uk",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x0013",
+        "vid": "0x7171"
+    },
+    "ws2812": {
+        "driver": "vendor",
+        "pin": "GP18"
+    }
+}
